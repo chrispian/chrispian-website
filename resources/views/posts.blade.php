@@ -1,4 +1,7 @@
-@php use App\Models\Post; @endphp
+@php
+    use App\Models\Post;
+
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -17,12 +20,6 @@
 
                     <!-- Vertical Timeline #1 -->
                     <div class="-my-6">
-
-                        <?php
-                        //$posts = Post::take( 10 )->orderBy( 'created_at', 'desc' )->get();
-                        $posts = Post::simplePaginate( 10 );
-
-                        ?>
 
                         @foreach ($posts as $post)
                             @component('components.timeline-item', ['post' => $post]) @endcomponent

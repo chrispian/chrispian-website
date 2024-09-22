@@ -21,7 +21,16 @@ Route::get('/about-chrispian', function () {
 
 Route::view('/about', 'about')->name('about');
 
+Route::get('/feed', function () {
+    return redirect()->to('/feed/blog');
+});
+
 
 Route::get('/blog', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');;
-
 Route::get('/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');;
+
+
+// Setup Spatie Feed Routes and set prefix
+Route::feeds('feed');
+
+

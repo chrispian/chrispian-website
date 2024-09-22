@@ -9,6 +9,11 @@
         @else
             <title>{{ config('app.name') }}</title>
         @endif
+        <!-- SEO -->
+        {!! seo() !!}
+
+        <!-- RSS Feed -->
+        <x-feed-links />
 
         <!-- Favicon -->
 		<link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
@@ -16,15 +21,16 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
+        <!-- Styles -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
         @livewireScripts
-
-
+        <x-embed-styles />
+        @laravelCommentsLivewireStyles
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        @laravelCommentsLivewireStyles
+
 
     </head>
 

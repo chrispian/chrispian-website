@@ -1,5 +1,5 @@
 <!-- Item #1 -->
-<div class="relative pl-8 sm:pl-32 py-6 group">
+<div class="relative pl-8 sm:pl-32 py-8 pt-0 group">
 	<!-- Purple label -->
 	<div class="font-medium text-neutral-500 mb-1 sm:mb-0">
         {{ $post->category[0]->title ?? 'Uncategorized' }}
