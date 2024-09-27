@@ -1,4 +1,37 @@
-@php use Spatie\Comments\Support\Config; @endphp
+@php
+    use Spatie\Comments\Support\Config;
+    use Illuminate\Support\Str;
+    use App\Models\User;
+
+    // Decode the extra field to get the custom author information
+    $extra = json_decode($comment->extra, true);
+    $guestName = $extra['author_name'] ?? __('comments::comments.guest'); // Default to 'Guest' if no name is found
+    $emailHash = $extra['email_hash'] ?? null; // Fetch the Gravatar hash from the extra field for guests
+
+    // Get email or email hash logic
+    $email = null;
+    if ($comment->commentator_id) {
+        // Try fetching the user's email based on the commentator_id
+        $user = User::find($comment->commentator_id);
+        $email = $user ? $user->email : null;
+    }
+
+    // Gravatar URL logic with email or email hash
+    $gravatarUrl = function ($email, $emailHash, $size = 80, $default = 'mp', $rating = 'x') {
+        if ($email) {
+            $hash = md5(strtolower(trim($email)));
+            return "https://www.gravatar.com/avatar/{$hash}?s={$size}&d={$default}&r={$rating}";
+        } elseif ($emailHash) {
+            // Use the email hash directly if provided (for guest users)
+            return "https://www.gravatar.com/avatar/{$emailHash}?s={$size}&d={$default}&r={$rating}";
+        }
+        return "https://www.gravatar.com/avatar/?s={$size}&d={$default}&r={$rating}";
+    };
+
+    // Determine the avatar URL based on the email or email hash
+    $avatarUrl = $gravatarUrl($email, $emailHash);
+@endphp
+
 <div
     id="comment-{{ $comment->id }}"
     class="comments-group {{ $showAvatar ? 'comments-group-with-avatars' : '' }}"
@@ -12,16 +45,18 @@
 >
     <div class="comments-comment">
         @if($showAvatar)
-            <x-comments::avatar :comment="$comment"/>
+            <img src="{{ $avatarUrl }}" alt="{{ $comment->commentator ? $comment->commentator->name : $guestName }}" class="comments-avatar" />
         @endif
         <div class="comments-comment-inner">
             <div class="comments-comment-header">
+                {{-- Check if the commentator is logged in --}}
                 @if($url = $comment->commentatorProperties()?->url)
                     <a href="{{ $url }}">
                         {{ $comment->commentatorProperties()->name }}
                     </a>
                 @else
-                    {{ $comment->commentatorProperties()?->name ?? __('comments::comments.guest')  }}
+                    {{-- Show guest name from the extra field, or default to "Guest" --}}
+                    {{ $guestName }}
                 @endif
                 <ul class="comments-comment-header-actions">
                     <li>
@@ -125,7 +160,7 @@
                                 <div
                                     wire:key="{{ $comment->id }}{{$summary['reaction']}}"
                                     @auth
-                                    wire:click="toggleReaction('{{ $summary['reaction'] }}')"
+                                        wire:click="toggleReaction('{{ $summary['reaction'] }}')"
                                     @endauth
                                     @class(['comments-reaction', 'is-reacted' => $summary['commentator_reacted']])
                                 >

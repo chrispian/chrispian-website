@@ -45,6 +45,19 @@ class GetComments extends Command
                         continue;
                     }
 
+                    // Extract the Gravatar hash from the avatar URL for size 96
+                    $avatarUrls = $wpComment['author_avatar_urls'] ?? [];
+                    $gravatarUrl = $avatarUrls['96'] ?? null;
+                    $emailHash = null;
+
+                    if ($gravatarUrl) {
+                        // Extract the hash from the Gravatar URL
+                        preg_match('/avatar\/([a-f0-9]+)\?/', $gravatarUrl, $matches);
+                        if (!empty($matches[1])) {
+                            $emailHash = $matches[1];
+                        }
+                    }
+
                     // Map WordPress comment fields to Spatie Comment model
                     $commentData = [
                         'commentable_type' => 'App\Models\Post', // Assuming comments are tied to the Post model
@@ -58,8 +71,8 @@ class GetComments extends Command
                         'parent_id' => null, // Assuming no threading, or could map if threadable
                         'extra' => json_encode([
                             'author' => $wpComment['author'] ?? null,
-                            'author_email' => $wpComment['author_email'] ?? null,
                             'author_name' => $wpComment['author_name'] ?? null,
+                            'email_hash' => $emailHash, // Store the extracted Gravatar hash
                         ]), // Map author fields to JSON
                     ];
 
