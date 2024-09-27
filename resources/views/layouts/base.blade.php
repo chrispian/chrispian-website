@@ -10,7 +10,7 @@
             <title>{{ config('app.name') }}</title>
         @endif
         <!-- SEO -->
-        {!! seo() !!}
+        {!! seo($post ?? null) !!}
 
         <!-- RSS Feed -->
         <x-feed-links />

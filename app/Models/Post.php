@@ -92,7 +92,7 @@ class Post extends Model implements Sortable, Feedable
         return new SEOData(
             title: $this->title,
             description: $this->summary,
-            author: $this->author->fullName,
+            author: $this->author->name,
         );
     }
 

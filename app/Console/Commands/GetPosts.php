@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Post;
 use App\Models\PostCategory;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -29,7 +28,7 @@ class GetPosts extends Command
 
         do {
             // Construct the dynamic API URL based on the current page
-            $wpApiUrl = "https://chrispian.com/wp-json/wp/v2/posts?page={$page}";
+            $wpApiUrl = "https://YOURDOMAIN.com/wp-json/wp/v2/posts?page={$page}";
             $response = Http::get($wpApiUrl);
 
             if ($response->successful()) {
@@ -69,7 +68,7 @@ class GetPosts extends Command
                     if (!empty($wpPost['tags'])) {
                         $tags = [];
                         foreach ($wpPost['tags'] as $wpTagId) {
-                            $wpTag = Http::get("https://chrispian.com/wp-json/wp/v2/tags/{$wpTagId}")->json();
+                            $wpTag = Http::get("https://YOURDOMAIN.com/wp-json/wp/v2/tags/{$wpTagId}")->json();
                             $tag = Tag::firstOrCreate(['wordpress_id' => $wpTag['id']], [
                                 'name' => $wpTag['name'],
                             ]);
@@ -82,7 +81,7 @@ class GetPosts extends Command
                     if (!empty($wpPost['categories'])) {
                         $categories = [];
                         foreach ($wpPost['categories'] as $wpCategoryId) {
-                            $wpCategory = Http::get("https://chrispian.com/wp-json/wp/v2/categories/{$wpCategoryId}")->json();
+                            $wpCategory = Http::get("https://YOURDOMAIN.com/wp-json/wp/v2/categories/{$wpCategoryId}")->json();
                             $category = PostCategory::firstOrCreate(['id' => $wpCategory['id']], [
                                 'title' => $wpCategory['name'],
                                 'slug' => Str::slug($wpCategory['name']),
