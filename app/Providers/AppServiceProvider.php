@@ -23,12 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         SEOManager::SEODataTransformer(function (SEOData $SEOData): SEOData {
 
-
             // TODO: Add home/about page summary/description
-
-
-            // TODO: Extract this to a config file or something
-            $tagline = 'Tagline Here';
 
 //            if (request()->path() === '/') {
 //                $SEOData->title = 'Chrispian.com - ' . $tagline;
@@ -43,8 +38,6 @@ class AppServiceProvider extends ServiceProvider
             if (pathinfo(request()->path(), PATHINFO_FILENAME) === 'blog') {
                 $SEOData->title = 'Blog - Chrispian.com';
             }
-
-
 
             return $SEOData;
         });
