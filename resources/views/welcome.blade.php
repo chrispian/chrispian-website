@@ -46,7 +46,7 @@
             <div class="mx-auto px-4 md:px-6">
                 <div class="flex flex-col justify-center divide-y divide-slate-200 [&>*]:py-1">
 
-                    <div class="w-7/12 mx-auto">
+                    <div class="w-full 2xl:w-8/12 mx-auto">
 
                         <!-- Vertical Timeline #1 -->
                         <div>
