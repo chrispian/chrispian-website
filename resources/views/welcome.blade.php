@@ -10,7 +10,7 @@
         @include('layouts.nav')
 
 
-            <section class="overflow-hidden pt-4 sm:w-full md:w-full xl:w-11/12 mx-auto">
+            <section class="overflow-hidden pt-4 sm:w-full xl:w-11/12 mx-auto">
             <div class="px-4 mx-auto sm:px-6 lg:px-8 w-full">
                 <div class="grid items-center grid-cols-1 md:grid-cols-2 w-full 2xl:w-7/12 mx-auto">
 
@@ -46,7 +46,7 @@
             <div class="mx-auto px-4 md:px-6">
                 <div class="flex flex-col justify-center divide-y divide-slate-200 [&>*]:py-1">
 
-                    <div class="w-full 2xl:w-8/12 mx-auto">
+                    <div class="mx-auto w-full 2xl:w-[60%]">
 
                         <!-- Vertical Timeline #1 -->
                         <div>

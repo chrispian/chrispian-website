@@ -5,13 +5,59 @@
         {{ $post->category[0]->title ?? 'Uncategorized' }}
     </div>
 	<!-- Vertical line (::before) ~ Date ~ Title ~ Circle marker (::after) -->
-	<div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-0 before:h-full before:px-px before:bg-neutral-600 sm:before:ml-[6.5rem] before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-0 after:w-2 after:h-2 after:bg-neutral-600 after:border-2 after:box-content after:border-neutral-600 after:rounded-full sm:after:ml-[6.5rem] after:-translate-x-1/2 after:translate-y-1.5">
-		<time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-neutral-600">
+    <div class="
+            flex
+            flex-col
+            items-start
+            mb-1
+            after:absolute
+            after:left-2
+            after:w-0
+            after:h-0
+            after:bg-neutral-600
+            after:border-0
+            sm:after:border-0
+            lg:after:border-2
+
+            after:box-content
+            after:border-neutral-600
+            after:rounded-full
+            after:-translate-x-1/2
+            after:translate-y-1.5
+            sm:flex-row
+            sm:p-0
+            sm:m-0
+            sm:before:left-0
+            sm:before:ml-[6.5rem]
+            sm:after:left-0
+            sm:after:ml-[6.5rem]
+            md:p2
+            md:m-2
+            md:after:w-2
+            md:after:h-2
+
+            group-last:before:hidden
+            sm:group-last:before:hidden
+            lg:group-last:before:inline-block
+
+            before:absolute
+            before:left-2
+            before:h-full
+            before:px-px
+            before:bg-neutral-600
+            before:self-start
+            before:-translate-x-1/2
+            before:translate-y-3
+
+
+
+            ">
+        <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-neutral-600">
             {{ $post->created_at->format('Y-m-d') }}
-		</time>
-		<div class="text-xl font-bold text-[#8cfbe6]">
+        </time>
+        <div class="text-xl font-bold text-[#8cfbe6]">
             {{ $post->title }}
-		</div>
+        </div>
 
 	</div>
 	<!-- Content -->

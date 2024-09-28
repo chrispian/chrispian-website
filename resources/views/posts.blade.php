@@ -13,7 +13,7 @@
         @include('layouts.nav')
         <!-- Component Start -->
     <section class="relative flex flex-col justify-center bg-[#1c1d1f] overflow-hidden">
-        <h2 class="ml-48 text-4xl text-orange-700">Blog Posts</h2>
+        <h2 class="ml-6 lg:ml-48 2xl:ml-96 text-4xl text-orange-700">Blog Posts</h2>
         <div class="w-full max-w-6xl mx-auto px-4 md:px-6 py-12">
 
             <div class="flex flex-col justify-center divide-y divide-slate-200 [&>*]:py-1">
