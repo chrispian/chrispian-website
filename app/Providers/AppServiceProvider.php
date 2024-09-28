@@ -30,16 +30,20 @@ class AppServiceProvider extends ServiceProvider
             // TODO: Extract this to a config file or something
             $tagline = 'Tagline Here';
 
-            if (request()->path() === '/') {
-                $SEOData->title = 'Chrispian.com - ' . $tagline;
-            } else {
-                $SEOData->title = $SEOData->title . ' - ' . 'Chrispian.com';
-            }
+//            if (request()->path() === '/') {
+//                $SEOData->title = 'Chrispian.com - ' . $tagline;
+//            } else {
+//                $SEOData->title = $SEOData->title . ' - ' . 'Chrispian.com';
+//            }
 
-            // This will change the title on *EVERY* page. Do any logic you want here, e.g. based on the current request.
             if (pathinfo(request()->path(), PATHINFO_FILENAME) === 'about') {
                 $SEOData->title = 'About Me - Chrispian.com';
             }
+
+            if (pathinfo(request()->path(), PATHINFO_FILENAME) === 'blog') {
+                $SEOData->title = 'Blog - Chrispian.com';
+            }
+
 
 
             return $SEOData;
