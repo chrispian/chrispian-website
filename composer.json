@@ -20,6 +20,7 @@
     "require": {
         "php": "^8.2",
         "awcodes/filament-curator": "^3.5",
+        "awcodes/filament-gravatar": "^2.0",
         "awcodes/filament-table-repeater": "^3.0",
         "awcodes/filament-tiptap-editor": "^3.0",
         "awcodes/overlook": "^2.2",
