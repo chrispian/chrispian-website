@@ -97,7 +97,7 @@
 
                                 </div>
                                 <!-- Content -->
-                                <div class="text-neutral-300">
+                                <div class="text-neutral-300 post-body">
                                     <style>
                                         p {
                                             margin-bottom: 1rem;
