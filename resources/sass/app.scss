@@ -147,3 +147,7 @@ pre code.torchlight .summary-caret {
 .post-body ol li {
     @apply list-decimal mb-2;
 }
+
+.error_404 {
+    @apply flex items-center justify-center h-screen;
+}
