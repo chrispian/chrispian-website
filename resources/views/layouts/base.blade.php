@@ -37,5 +37,7 @@
     <body class="bg-[#1c1d1f] text-neutral-300">
         @yield('body')
         @laravelCommentsLivewireScripts
+
+
     </body>
 </html>

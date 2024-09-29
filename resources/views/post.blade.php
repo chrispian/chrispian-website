@@ -26,7 +26,7 @@
         <!-- Component Start -->
         <!-- component -->
         <section class="mb-12 relative flex flex-col justify-center bg-[#1c1d1f] overflow-hidden w-full">
-            <div class="w-full mx-auto">
+            <div class="w-full lg:w-[80%] 2xl:w-[60%]  mx-auto justify-center">
                 <div class="flex flex-col justify-center divide-y divide-slate-200 [&>*]:py-1">
 
                     <div class="w-full mx-auto">
