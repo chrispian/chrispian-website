@@ -136,10 +136,14 @@ pre code.torchlight .summary-caret {
     @apply mr-4;
 }
 
-.post-body ul {
+.post-body ul, ol {
     @apply ml-8 my-4;
 }
 
-.post-body li {
-    @apply list-disc;
+.post-body ul li {
+    @apply list-disc mb-2;
+}
+
+.post-body ol li {
+    @apply list-decimal mb-2;
 }
