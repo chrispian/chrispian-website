@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "awcodes/filament-curator": "^3.5",
         "awcodes/filament-gravatar": "^2.0",
         "awcodes/filament-table-repeater": "^3.0",
