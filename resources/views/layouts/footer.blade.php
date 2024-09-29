@@ -31,4 +31,5 @@
 
         </div>
     </div>
+    @include('torchlight-notice')
 </footer>

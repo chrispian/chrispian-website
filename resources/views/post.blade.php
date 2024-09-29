@@ -105,26 +105,15 @@
                                     </style>
 
                                     <x-markdown>
-                                        ```bash theme:github-dark
-                                        echo "Winter is coming, dark!";
-
-                                    </x-markdown>
-
-                                    <x-markdown>
                                         {!! $post->content !!}
                                     </x-markdown>
 
-
-                                    @include('torchlight-notice')
 
 
 
                                     @if($is_draft)
                                         <x-draft-disclaimer />
                                     @endif
-
-
-
 
                                 </div>
 
