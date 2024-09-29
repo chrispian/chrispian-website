@@ -11,12 +11,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Comments\Models\Concerns\InteractsWithComments;
 use Spatie\Comments\Models\Concerns\Interfaces\CanComment;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
-class User extends Authenticatable  implements CanComment, FilamentUser, HasAvatar
+class User extends Authenticatable  implements CanComment, FilamentUser, HasAvatar, Sortable
 {
     use HasFactory;
     use Notifiable;
     use InteractsWithComments;
+    use SortableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -62,5 +65,10 @@ class User extends Authenticatable  implements CanComment, FilamentUser, HasAvat
         return $this->avatar_url;
     }
 
+
+    public $sortable = [
+        'order_column_name' => 'sort_order',
+        'sort_when_creating' => true,
+    ];
 
 }
