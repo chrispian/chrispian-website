@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\Comments\Models\Concerns\HasComments;
@@ -27,26 +28,20 @@ class Post extends Model implements Sortable, Feedable
     protected $guarded = [];
 
 
-    public function categories() {
-        return $this->belongsToMany(PostCategory::class, 'post_post_category');
-    }
-
-    /**
-     * Each Post can have many categories.
-     *
-     */
-    public function category()
+    public function categories(): MorphMany
     {
-        return $this->belongsToMany(PostCategory::class, 'post_post_category');
+        return $this->morphMany(Category::class, 'object');
     }
 
-    /**
-     * Each Post can have many categories.
-     *
-     */
+    public function category(): MorphMany
+    {
+        return $this->morphMany(Category::class, 'object');
+    }
+
+
     public function author()
     {
-        // return $this->belongsToMany('PostCategory::class');
+        // return $this->belongsToMany('Category::class');
         return $this->belongsTo(User::class);
     }
 

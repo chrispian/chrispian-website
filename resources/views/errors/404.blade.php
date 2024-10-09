@@ -8,8 +8,6 @@
 
     <div class="overflow-x-hidden content-center">
 
-
-
         <!-- component -->
         <!-- This is an example component -->
         <div class="error_404 w-2/3 mx-auto flex items-center content-center">

@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostCategoryResource\Pages;
-use App\Models\PostCategory;
+use App\Models\Category;
 use Closure;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 
 class PostCategoryResource extends Resource
 {
-    protected static ?string $model = PostCategory::class;
+    protected static ?string $model = Category::class;
 
     protected static ?string $navigationGroup = "Content";
 

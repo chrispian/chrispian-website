@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Post;
-use App\Models\PostCategory;
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -82,7 +82,7 @@ class GetPosts extends Command
                         $categories = [];
                         foreach ($wpPost['categories'] as $wpCategoryId) {
                             $wpCategory = Http::get("https://YOURDOMAIN.com/wp-json/wp/v2/categories/{$wpCategoryId}")->json();
-                            $category = PostCategory::firstOrCreate(['id' => $wpCategory['id']], [
+                            $category = Category::firstOrCreate([ 'id' => $wpCategory[ 'id']], [
                                 'title' => $wpCategory['name'],
                                 'slug' => Str::slug($wpCategory['name']),
                             ]);
