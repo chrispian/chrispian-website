@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->unsignedBigInteger('object_id')->nullable();
-            $table->string('object_type')->nullable();
+        Schema::table('books', function (Blueprint $table) {
             $table->text('notes')->nullable();
         });
     }
 
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('books', function (Blueprint $table) {
+            //
+        });
+    }
 };

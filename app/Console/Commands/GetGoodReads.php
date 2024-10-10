@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Book;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class GetGoodReads extends Command
 {
@@ -71,6 +72,7 @@ class GetGoodReads extends Command
                     'title' => trim($categoryName),
                     'object_type' => Book::class,
                     'object_id' => $book->id,
+                    'slug' => Str::slug($categoryName),
                 ]);
                 $book->categories()->save($category);
             }
