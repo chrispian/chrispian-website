@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::with('category')->orderBy( 'created_at', 'desc' )->simplePaginate( 10 );
-        return view('books', [ 'posts' => $posts]);
+        $books = Book::whereNotNull('isbn' )->orderBy( 'date_read', 'desc' )->simplePaginate( 10 );
+        return view('books', [ 'posts' => $books]);
 
     }
 
@@ -37,16 +37,16 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $slug)
+    public function show(string $isbn)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Book::where('isbn', $isbn)->firstOrFail();
         return view('book', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit(Book $book)
     {
         //
     }
@@ -54,7 +54,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Book $book)
     {
         //
     }
@@ -62,7 +62,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Book $book)
     {
         //
     }

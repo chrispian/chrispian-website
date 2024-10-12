@@ -63,11 +63,12 @@
 	<!-- Content -->
 	<div class="text-neutral-300">
 		{{ Str::limit($post->summary, 200) }}
-        [<a class="uppercase text-sm text-orange-700 underline" href="{{ route('posts.show', ['slug' => $post->slug]) }}">read more</a>]
+        [<a class="uppercase text-sm text-orange-700 underline" href="{{ route('books.show', ['isbn' => $post->isbn]) }}">read more</a>]
 
-        @if(in_array('Draft', $post->category->pluck('title')->toArray()))
-            <x-draft-disclaimer />
-        @endif
+
+{{--        @if(in_array('Draft', $post->category->pluck('title')->toArray()))--}}
+{{--            <x-draft-disclaimer />--}}
+{{--        @endif--}}
 
 
     </div>

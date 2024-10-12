@@ -27,6 +27,12 @@ Route::get('/feed', function () {
 
 
 Route::get('/blog', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');;
+
+
+Route::get('/books/{isbn}', [\App\Http\Controllers\BookController::class, 'show'])->name('books.show');;
+Route::get('/books', [\App\Http\Controllers\BookController::class, 'index'])->name('books.index');;
+
+
 Route::get('/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');;
 
 
