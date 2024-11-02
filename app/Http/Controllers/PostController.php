@@ -14,7 +14,7 @@ class PostController extends Controller
     {
 
         $posts = Post::with('category')->orderBy( 'created_at', 'desc' )->simplePaginate( 10 );
-        return view('books', [ 'posts' => $posts]);
+        return view('posts', [ 'posts' => $posts]);
 
     }
 
