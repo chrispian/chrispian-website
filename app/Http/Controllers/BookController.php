@@ -14,7 +14,7 @@ class BookController extends Controller
     {
 
         $books = Book::whereNotNull('isbn' )->orderBy( 'date_read', 'desc' )->simplePaginate( 10 );
-        return view('books', [ 'posts' => $books]);
+        return view('books', [ 'books' => $books]);
 
     }
 
@@ -39,8 +39,8 @@ class BookController extends Controller
      */
     public function show(string $isbn)
     {
-        $post = Book::where('isbn', $isbn)->firstOrFail();
-        return view('book', compact('post'));
+        $book = Book::where('isbn', $isbn)->firstOrFail();
+        return view('book', compact('book'));
     }
 
     /**

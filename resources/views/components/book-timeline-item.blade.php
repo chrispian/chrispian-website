@@ -2,7 +2,7 @@
 <div class="relative pl-8 sm:pl-32 py-8 pt-0 group">
 	<!-- Purple label -->
 	<div class="font-medium text-neutral-500 mb-1 sm:mb-0">
-        {{ $post->category[0]->title ?? 'Uncategorized' }}
+        {{ $book->category[0]->title ?? 'Uncategorized' }}
     </div>
 	<!-- Vertical line (::before) ~ Date ~ Title ~ Circle marker (::after) -->
     <div class="
@@ -53,20 +53,20 @@
 
             ">
         <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-neutral-600">
-            {{ $post->created_at->format('Y-m-d') }}
+            {{ $book->created_at->format('Y-m-d') }}
         </time>
         <div class="text-xl font-bold text-[#8cfbe6]">
-            {{ $post->title }}
+            {{ $book->title }}
         </div>
 
 	</div>
 	<!-- Content -->
 	<div class="text-neutral-300">
-		{{ Str::limit($post->summary, 200) }}
-        [<a class="uppercase text-sm text-orange-700 underline" href="{{ route('posts.show', ['slug' => $post->slug]) }}">read more</a>]
+		{{ Str::limit($book->summary, 200) }}
+{{--        [<a class="uppercase text-sm text-orange-700 underline" href="{{ route('books.show', ['isbn' => $book->isbn]) }}">read more</a>]--}}
 
 
-{{--        @if(in_array('Draft', $post->category->pluck('title')->toArray()))--}}
+{{--        @if(in_array('Draft', $book->category->pluck('title')->toArray()))--}}
 {{--            <x-draft-disclaimer />--}}
 {{--        @endif--}}
 

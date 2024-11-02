@@ -1,5 +1,17 @@
 @php
-    use App\Models\Book;
+    use App\Models\Post;
+    use League\CommonMark\Environment\Environment;
+    use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+    use League\CommonMark\MarkdownConverter;use Torchlight\Commonmark\V2\TorchlightExtension;
+
+
+    $is_draft = false;
+    if (in_array('Draft', $post->category->pluck('title')->toArray())) {
+        $is_draft = true;
+    }
+
+
+
 @endphp
 @extends('layouts.app')
 
@@ -9,6 +21,7 @@
 
     <div class="overflow-x-hidden">
         @include('layouts.nav')
+
 
         <!-- Component Start -->
         <!-- component -->
@@ -21,11 +34,11 @@
                         <!-- Vertical Timeline #1 -->
                         <div class="w-full">
 
-                            <!-- Post {{ $book->id }} -->
+                            <!-- Post {{ $post->id }} -->
                             <div class="relative px-4 sm:px-4 md:px-6 lg:pl-32 py-6 group">
                                 <!-- Purple label -->
                                 <div class="font-medium text-neutral-500 mb-1 sm:mb-0">
-{{--                                    {{ $book->category[0]->title ?? null }}--}}
+                                    {{ $post->category[0]->title }}
                                 </div>
                                 <!-- Vertical line (::before) ~ Date ~ Title ~ Circle marker (::after) -->
                                 <div class="
@@ -76,10 +89,10 @@
 
                                             ">
                                     <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-neutral-600">
-                                        {{ $book->created_at->format('Y-m-d') }}
+                                        {{ $post->created_at->format('Y-m-d') }}
                                     </time>
                                     <div class="text-xl font-bold text-[#8cfbe6]">
-                                        {{ $book->title }}
+                                        {{ $post->title }}
                                     </div>
 
                                 </div>
@@ -92,9 +105,15 @@
                                     </style>
 
                                     <x-markdown>
-                                        {!! $book->content !!}
+                                        {!! $post->content !!}
                                     </x-markdown>
 
+
+
+
+                                    @if($is_draft)
+                                        <x-draft-disclaimer />
+                                    @endif
 
                                 </div>
 
@@ -104,7 +123,7 @@
                         </div>
                         <!-- End: Vertical Timeline #1 -->
 
-                        <livewire:comments :model="$book"/>
+                        <livewire:comments :model="$post"/>
 
                     </div>
 
@@ -117,7 +136,3 @@
     </div>
 
 @endsection
-
-
-
-

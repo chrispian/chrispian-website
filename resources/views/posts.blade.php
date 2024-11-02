@@ -1,10 +1,11 @@
 @php
-    use App\Models\Book;
+    use App\Models\Post;
 
 @endphp
 @extends('layouts.app')
 
 @section('content')
+
 
     <!-- component -->
 
@@ -12,7 +13,7 @@
         @include('layouts.nav')
         <!-- Component Start -->
         <section class="relative flex flex-col justify-center bg-[#1c1d1f] overflow-hidden">
-            <h2 class="ml-6 lg:ml-48 2xl:ml-96 text-4xl text-orange-700">Books</h2>
+            <h2 class="ml-6 lg:ml-48 2xl:ml-96 text-4xl text-orange-700">Blog Posts</h2>
             <div class="w-full max-w-6xl mx-auto px-4 md:px-6 py-12">
 
                 <div class="flex flex-col justify-center divide-y divide-slate-200 [&>*]:py-1">
@@ -23,12 +24,12 @@
                         <!-- Vertical Timeline #1 -->
                         <div class="-my-6">
 
-                            @foreach ($books as $book)
-                                @component('components.book-timeline-item', ['book' => $book]) @endcomponent
+                            @foreach ($posts as $post)
+                                @component('components.timeline-item', ['post' => $post]) @endcomponent
                             @endforeach
 
                             <div class="flex mt-6 justify-end">
-                                {{ $book->links() }}
+                                {{ $posts->links() }}
                             </div>
 
 
@@ -45,6 +46,3 @@
         @include('layouts.footer')
     </div>
 @endsection
-
-
-

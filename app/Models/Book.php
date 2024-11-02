@@ -29,7 +29,7 @@ class Book extends Model
 
     public function commentUrl() : string
     {
-        return route('posts.show', $this->slug);
+        return route('books.show', $this->slug);
     }
 
 }
