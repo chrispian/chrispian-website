@@ -63,15 +63,6 @@ class VorpalPanelProvider extends PanelProvider
             ->defaultAvatarProvider(GravatarProvider::class)
             ->plugins([
                 GravatarPlugin::make(),
-                CuratorPlugin::make()
-                    ->label('Media')
-                    ->pluralLabel('Media')
-                    ->navigationIcon(false)
-                    ->navigationGroup('Content')
-                    ->navigationSort(50)
-                    ->navigationCountBadge()
-                    ->registerNavigation(true)
-                    ->defaultListView('grid'),
                 OverlookPlugin::make()
                     ->sort(2)
                     ->columns([
