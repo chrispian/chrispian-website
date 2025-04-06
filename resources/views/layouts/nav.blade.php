@@ -30,7 +30,7 @@
         <div class="hidden md:flex md:flex-row md:-mx-4">
             <a href="/" class="my-1 hover:text-blue-500 md:mx-4 md:my-0">Home</a>
             <a href="/blog" class="my-1 hover:text-blue-500 md:mx-4 md:my-0">Blog</a>
-{{--            <a href="/books" class="my-1 hover:text-blue-500 md:mx-4 md:my-0">Books</a>--}}
+            <a href="/books" class="my-1 hover:text-blue-500 md:mx-4 md:my-0">Books</a>
             <a href="/about" class="my-1 hover:text-blue-500 md:mx-4 md:my-0">About Me</a>
         </div>
     </div>

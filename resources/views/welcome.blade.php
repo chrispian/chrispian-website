@@ -51,7 +51,7 @@
 
                             <?php
                             // TODO: Add status check here
-                            $posts = Post::with( 'category' )->orderBy( 'created_at', 'desc' )->take( 4 )->get();
+                            $posts = Post::with( 'categories' )->orderBy( 'created_at', 'desc' )->take( 4 )->get();
                             ?>
 
                             @foreach ($posts as $post)
@@ -63,21 +63,21 @@
                         <!-- End: Vertical Timeline #1 -->
 
 
-{{--                        <!-- Vertical Timeline #1 -->--}}
-{{--                        <div class="mt-12">--}}
-{{--                            <h3 class="relative pl-8 sm:pl-32 py-8 pt-0 ">Recently Finished Books</h3>--}}
-{{--                            <?php--}}
-{{--                            // TODO: Add status check here--}}
-{{--                            $books = Book::with( 'category' )->where('date_read', '>', 0)->orderBy( 'date_read', 'desc' )->take( 4 )->get();--}}
-{{--                            ?>--}}
+                        <!-- Vertical Timeline #1 -->
+                        <div class="mt-12">
+                            <h3 class="relative pl-8 sm:pl-32 py-8 pt-0 ">Recently Finished Books</h3>
+                            <?php
+                            // TODO: Add status check here
+                            $books = Book::with( 'category' )->where('date_read', '>', 0)->orderBy( 'date_read', 'desc' )->take( 4 )->get();
+                            ?>
 
-{{--                            @foreach ($books as $book)--}}
-{{--                                @component('components.book-timeline-item', ['book' => $book]) @endcomponent--}}
-{{--                            @endforeach--}}
+                            @foreach ($books as $book)
+                                @component('components.book-timeline-item', ['book' => $book]) @endcomponent
+                            @endforeach
 
 
-{{--                        </div>--}}
-{{--                        <!-- End: Vertical Timeline #1 -->--}}
+                        </div>
+                        <!-- End: Vertical Timeline #1 -->
 
 
                     </div>

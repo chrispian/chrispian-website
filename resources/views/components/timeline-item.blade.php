@@ -2,7 +2,10 @@
 <div class="relative pl-8 sm:pl-32 py-8 pt-0 group">
 	<!-- Purple label -->
 	<div class="font-medium text-neutral-500 mb-1 sm:mb-0">
-        {{ $post->category[0]->title ?? 'Uncategorized' }}
+        @foreach($post->categories as $category)
+            <span class="text-sm text-gray-600">{{ $category->title }}</span>@if(!$loop->last), @endif
+        @endforeach
+
     </div>
 	<!-- Vertical line (::before) ~ Date ~ Title ~ Circle marker (::after) -->
     <div class="

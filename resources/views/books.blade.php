@@ -28,7 +28,7 @@
                             @endforeach
 
                             <div class="flex mt-6 justify-end">
-                                {{ $book->links() }}
+                                {{ $books->links() }}
                             </div>
 
 

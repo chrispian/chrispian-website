@@ -6,9 +6,10 @@
 
 
     $is_draft = false;
-    if (in_array('Draft', $post->category->pluck('title')->toArray())) {
+    if ($post->categories->pluck('title')->contains('Draft')) {
         $is_draft = true;
     }
+
 
 
 
@@ -38,7 +39,10 @@
                             <div class="relative px-4 sm:px-4 md:px-6 lg:pl-32 py-6 group">
                                 <!-- Purple label -->
                                 <div class="font-medium text-neutral-500 mb-1 sm:mb-0">
-                                    {{ $post->category[0]->title }}
+                                    @foreach($post->categories as $category)
+                                        <span class="text-sm text-gray-600">{{ $category->title }}</span>@if(!$loop->last), @endif
+                                    @endforeach
+
                                 </div>
                                 <!-- Vertical line (::before) ~ Date ~ Title ~ Circle marker (::after) -->
                                 <div class="

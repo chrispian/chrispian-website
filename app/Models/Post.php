@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
 use Spatie\Comments\Models\Concerns\HasComments;
@@ -28,43 +31,41 @@ class Post extends Model implements Sortable, Feedable
     protected $guarded = [];
 
 
-    public function categories(): MorphMany
+    public function categories(): MorphToMany
     {
-        return $this->morphMany(Category::class, 'object');
+        return $this->morphToMany(Category::class, 'categorizable');
     }
 
-    public function category(): MorphMany
-    {
-        return $this->morphMany(Category::class, 'object');
-    }
-
-
-    public function author()
+    public function author() : BelongsTo
     {
         // return $this->belongsToMany('Category::class');
         return $this->belongsTo(User::class);
     }
 
-    public function project() {
+    public function project() : BelongsTo
+    {
         return $this->belongsTo(PostProject::class);
     }
 
-    public function series() {
+    public function series() : BelongsTo
+    {
         return $this->belongsTo(PostSeries::class);
     }
 
-    function posts(){
-        return $this->belongsTo(Post::class);
+    function posts() : BelongsToMany
+    {
+        return $this->belongsToMany(Post::class);
     }
 
-    function post(){
+    function post() : BelongsToMany
+    {
         // return $this->belongsToMany(Post::class);
-        return $this->belongsTo(Post::class, 'id');
+        return $this->belongsToMany(Post::class, 'id');
     }
 
-    function related(){
+    function related() : BelongsToMany{
         // return $this->belongsToMany(Post::class);
-        return $this->belongsTo(Post::class, 'related_id');
+        return $this->BelongsToMany(Post::class, 'related_id');
     }
 
     public $sortable = [
