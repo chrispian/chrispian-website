@@ -98,6 +98,7 @@ class PostResource extends Resource
 //                    CuratorPicker::make('cover_image')
 //                       ->size('lg'), // defaults to md
                     SpatieMediaLibraryFileUpload::make('cover_image')
+                        ->rules(['max:10240'])
                         ->collection('cover_image')
                         ->responsiveImages(),
                     Select::make('author_id')
