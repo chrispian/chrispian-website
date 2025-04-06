@@ -32,28 +32,34 @@ class PostCategoryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                TextInput::make('title')
-                    ->required()
-
-                    ->afterStateUpdated(function (Get $get, Set $set, ?string $state) {
-                        if (! $get('is_slug_changed_manually') && filled($state)) {
-                            $set('slug', Str::slug($state));
-                        }
-                    })
-                    ->live(onBlur: true)
-                    ->maxLength(255),
-                TextInput::make('slug')
-                    ->required()
-                    ->afterStateUpdated(function (Set $set) {
-                        $set('is_slug_changed_manually', true);
-                    })
-                    ->maxLength(255),
-                Hidden::make('is_slug_changed_manually')
-                      ->default(false)
-                      ->dehydrated(false),
-            ]);
+            ->schema(static::getFormSchema());
     }
+
+    public static function getFormSchema(): array
+    {
+        return [
+            TextInput::make('title')
+                ->required()
+
+                ->afterStateUpdated(function (Get $get, Set $set, ?string $state) {
+                    if (! $get('is_slug_changed_manually') && filled($state)) {
+                        $set('slug', Str::slug($state));
+                    }
+                })
+                ->live(onBlur: true)
+                ->maxLength(255),
+            TextInput::make('slug')
+                ->required()
+                ->afterStateUpdated(function (Set $set) {
+                    $set('is_slug_changed_manually', true);
+                })
+                ->maxLength(255),
+            Hidden::make('is_slug_changed_manually')
+                ->default(false)
+                ->dehydrated(false),
+        ];
+    }
+
 
     public static function table(Table $table): Table
     {

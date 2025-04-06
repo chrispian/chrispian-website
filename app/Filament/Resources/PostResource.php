@@ -4,11 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers\PostsRelationManager;
+use App\Models\Category;
 use App\Models\Post;
 use Awcodes\Curator\Components\Forms\CuratorEditor;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Awcodes\Curator\Components\Tables\CuratorColumn;
 use Closure;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\CheckboxList;
@@ -107,9 +109,30 @@ class PostResource extends Resource
                               ->relationship('project', 'title'),
                         Select::make('series_id')
                               ->relationship('series', 'title'),
-                        CheckboxList::make('categories')
-                              ->relationship('categories', 'title')
-                              ->required(),
+                        Select::make('categories')
+                            ->relationship('categories', 'title')
+                            ->noSearchResultsMessage('No categories...')
+                            ->multiple()
+                            ->preload()
+                            ->optionsLimit(6)
+                            ->createOptionForm(
+                                PostCategoryResource::getFormSchema()
+                            )
+                            ->createOptionUsing(function (array $data, \Filament\Forms\Components\Select $component) {
+                                // Create the account manually
+                                $category = Category::create($data);
+
+                                // Append to the current selected state
+                                $state = $component->getState() ?? [];
+
+                                // Ensure uniqueness and append the new key
+                                $component->state([...$state, $category->getKey()]);
+                                $component->callAfterStateUpdated();
+
+                                // Return the ID of the new record — Filament will auto-select it
+                                return $category->getKey('object_id');
+                            })
+                            ->required(),
                         SpatieTagsInput::make('tags')
 
 
@@ -139,7 +162,7 @@ class PostResource extends Resource
                     ->dateTime(),
             ])
             ->reorderable('sort_order')
-            ->defaultSort('sort_order')
+            ->defaultSort('sort_order', 'desc')
             ->filters([
                 //
             ])

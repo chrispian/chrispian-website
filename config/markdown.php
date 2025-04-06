@@ -11,6 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\Extension\Table\TableExtension;
 use Torchlight\Commonmark\V2\TorchlightExtension;
 
 return [
@@ -71,7 +73,10 @@ return [
      */
     'extensions' => [
         // Torchlight syntax highlighting
+        // GithubFlavoredMarkdownExtension::class,
+        TableExtension::class,
         TorchlightExtension::class,
+
     ],
     /*
      * These block renderers should be added to the markdown environment. A valid

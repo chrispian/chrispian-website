@@ -108,7 +108,7 @@
                                         }
                                     </style>
 
-                                    <x-markdown>
+                                    <x-markdown :options="['commonmark' => ['enable_strong' => true, 'enable_em' => true]]">
                                         {!! $post->content !!}
                                     </x-markdown>
 
