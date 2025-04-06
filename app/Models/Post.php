@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
@@ -14,14 +13,19 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Tags\HasTags;
 
-class Post extends Model implements Sortable, Feedable
+class Post extends Model implements Sortable, Feedable, HasMedia
 {
     use HasComments;
     use HasTags;
     use SortableTrait;
     use HasSEO;
+    use InteractsWithMedia;
 
     protected $casts = [
       'content' => 'array',
@@ -109,4 +113,33 @@ class Post extends Model implements Sortable, Feedable
     {
         return Post::all();
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('thumbnail')->singleFile();
+        $this->addMediaCollection('cover_image')->singleFile();
+    }
+
+    public function registerMediaConversions( Media|null $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(300)
+            ->height(168)
+            ->sharpen(10)
+            ->performOnCollections('cover_image');
+
+        $this->addMediaConversion('medium')
+            ->width(540)
+            ->height(300)
+            ->sharpen(10)
+            ->performOnCollections('cover_image');
+
+        $this->addMediaConversion('large')
+            ->width(1024)
+            ->height(576)
+            ->sharpen(10)
+            ->performOnCollections('cover_image');
+    }
+
+
 }

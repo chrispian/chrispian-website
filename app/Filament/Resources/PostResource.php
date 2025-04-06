@@ -19,12 +19,14 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -93,47 +95,50 @@ class PostResource extends Resource
                     ->schema([
 //                        FileUpload::make('cover_image')
 //                            ->image(),
-                CuratorPicker::make('cover_image')
-                    ->size('lg'), // defaults to md
-                        Select::make('author_id')
-                            ->relationship('author', 'name')
-                            ->required()
-                            ->default('1'),
-                        Select::make('status')
-                            ->required()
-                            ->options([
-                                'Draft' => 'Draft',
-                                'Published' => 'Published',
-                            ])->default('Draft'),
-                        Select::make('project_id')
-                              ->relationship('project', 'title'),
-                        Select::make('series_id')
-                              ->relationship('series', 'title'),
-                        Select::make('categories')
-                            ->relationship('categories', 'title')
-                            ->noSearchResultsMessage('No categories...')
-                            ->multiple()
-                            ->preload()
-                            ->optionsLimit(6)
-                            ->createOptionForm(
-                                PostCategoryResource::getFormSchema()
-                            )
-                            ->createOptionUsing(function (array $data, \Filament\Forms\Components\Select $component) {
-                                // Create the account manually
-                                $category = Category::create($data);
+//                    CuratorPicker::make('cover_image')
+//                       ->size('lg'), // defaults to md
+                    SpatieMediaLibraryFileUpload::make('cover_image')
+                        ->collection('cover_image')
+                        ->responsiveImages(),
+                    Select::make('author_id')
+                        ->relationship('author', 'name')
+                        ->required()
+                        ->default('1'),
+                    Select::make('status')
+                        ->required()
+                        ->options([
+                            'Draft' => 'Draft',
+                            'Published' => 'Published',
+                        ])->default('Draft'),
+                    Select::make('project_id')
+                          ->relationship('project', 'title'),
+                    Select::make('series_id')
+                          ->relationship('series', 'title'),
+                    Select::make('categories')
+                        ->relationship('categories', 'title')
+                        ->noSearchResultsMessage('No categories...')
+                        ->multiple()
+                        ->preload()
+                        ->optionsLimit(6)
+                        ->createOptionForm(
+                            PostCategoryResource::getFormSchema()
+                        )
+                        ->createOptionUsing(function (array $data, \Filament\Forms\Components\Select $component) {
+                            // Create the account manually
+                            $category = Category::create($data);
 
-                                // Append to the current selected state
-                                $state = $component->getState() ?? [];
+                            // Append to the current selected state
+                            $state = $component->getState() ?? [];
 
-                                // Ensure uniqueness and append the new key
-                                $component->state([...$state, $category->getKey()]);
-                                $component->callAfterStateUpdated();
+                            // Ensure uniqueness and append the new key
+                            $component->state([...$state, $category->getKey()]);
+                            $component->callAfterStateUpdated();
 
-                                // Return the ID of the new record — Filament will auto-select it
-                                return $category->getKey('object_id');
-                            })
-                            ->required(),
-                        SpatieTagsInput::make('tags')
+                            // Return the ID of the new record — Filament will auto-select it
+                            return $category->getKey('object_id');
+                        })
+                        ->required(),
+                    SpatieTagsInput::make('tags')
 
 
 
@@ -151,7 +156,8 @@ class PostResource extends Resource
                     ->toggleable()
                     ->sortable(),
 
-                CuratorColumn::make('cover_image')->size('40'),
+                SpatieMediaLibraryImageColumn::make('cover_image')
+                    ->size(40),
                 TextColumn::make('author.name'),
                 TextColumn::make('title'),
                 TextColumn::make('summary'),
