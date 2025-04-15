@@ -53,7 +53,10 @@
 
             ">
         <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-neutral-600">
-            {{ $book->created_at->format('Y-m-d') ?? null }}
+            @php
+            $date = $book->created_at->format('Y-m-d') ?? null;
+            @endphp
+            {{ $date }}
         </time>
         <div class="text-xl font-bold text-[#8cfbe6]">
             {{ $book->title }}
