@@ -33,8 +33,21 @@ Route::get('/books/{isbn}', [\App\Http\Controllers\BookController::class, 'show'
 Route::get('/books', [\App\Http\Controllers\BookController::class, 'index'])->name('books.index');;
 
 
+Route::get('/part-1-the-wayback-machine-how-i-rebuilt-myself-from-broken-data', function () {
+    return redirect('/part-1-the-wayback-machine-how-i-wrote-myself-into-being', 301);
+});
+
 Route::get('/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');;
 
+Route::fallback(function () {
+    $slug = request()->path();
+
+    if ($slug === 'part-1-the-wayback-machine-how-i-rebuilt-myself-from-broken-data') {
+        return redirect('/part-1-the-wayback-machine-how-i-wrote-myself-into-being', 301);
+    }
+
+    abort(404);
+});
 
 // Setup Spatie Feed Routes and set prefix
 Route::feeds('feed');

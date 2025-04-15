@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::with('category')->orderBy( 'created_at', 'desc' )->simplePaginate( 10 );
+        $posts = Post::with('categories')->orderBy( 'created_at', 'desc' )->simplePaginate( 10 );
         return view('posts', [ 'posts' => $posts]);
 
     }
@@ -39,6 +39,10 @@ class PostController extends Controller
      */
     public function show(string $slug)
     {
+        if ($slug === 'part-1-the-wayback-machine-how-i-rebuilt-myself-from-broken-data') {
+            $slug = 'part-1-the-wayback-machine-how-i-wrote-myself-into-being';
+        }
+
         $post = Post::where('slug', $slug)->firstOrFail();
         return view('post', compact('post'));
     }

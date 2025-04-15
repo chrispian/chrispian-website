@@ -51,7 +51,7 @@
 
                             <?php
                             // TODO: Add status check here
-                            $posts = Post::with( 'categories' )->orderBy( 'created_at', 'desc' )->take( 4 )->get();
+                            $posts = Post::with( 'categories' )->orderBy( 'created_at', 'desc' )->take( 10 )->get();
                             ?>
 
                             @foreach ($posts as $post)

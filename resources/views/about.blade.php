@@ -22,26 +22,28 @@
                             ⚡ About Me
                         </h2>
                         <p class="mt-3 text-xl leading-relaxed text-gray-600 dark:text-gray-300 md:mt-8">
-                            I am a software engineer, writer, and creator. I write about software development, productivity, and life. I am passionate about learning and sharing knowledge. I am always looking for new opportunities to grow and learn.
+                            Hi, I'm Chrispian—a lifelong maker, curious technologist, and storyteller at heart.
                         </p>
 
                         <p class="mt-3 text-xl leading-relaxed text-gray-600 dark:text-gray-300 md:mt-8">
-                            My name is Chrispian and I like to make things. I’m a web developer and have been working in the computer / internet field for almost 26 years now. I also draw, write, make things, take pictures and love figuring stuff out.
+                            For over 25 years, I've navigated the evolving landscapes of the internet—from the days of BBS and dial-up to today's dynamic web. My journey began as a PC technician, delving into hardware and networking, and evolved into a deep passion for web development. Along the way, I've worn many hats: ISP founder, blog network runner, lead developer, and development manager. Each role has been a chapter in my ongoing story of exploration and creation.
                         </p>
+
                         <p class="mt-3 text-xl leading-relaxed text-gray-600 dark:text-gray-300 md:mt-8">
-                            I started out in the BBS days and dabbled in programming, hardware, networking and just about anything computer related. My first job in the field was as a PC Tech where we repaired computers, did corporate installs, ran networks and set them up and everything related to PCs. A couple of years into my career the web was born and I learned some basic HTML from a friend and that was it! I started learning about web servers, web development and anything and everything related to how it all worked.
+                            But my interests extend beyond code. I'm a writer, illustrator, photographer, and tabletop RPG enthusiast. I believe in the power of storytelling—whether through a well-crafted article, a compelling game narrative, or a striking photograph.
                         </p>
+
                         <p class="mt-3 text-xl leading-relaxed text-gray-600 dark:text-gray-300 md:mt-8">
-                            Since then I’ve started an ISP, ran a Blog Network, freelanced, was Lead Developer at a local ISP and then Development Manager at my last job. I recently took a small step back to give myself a chance to get caught back up on more modern style web dev and now I’m on a path to become a senior / lead engineer.
+                            Together with my wife, I co-founded Makers South, where we handcraft custom leather goods. It's a tangible extension of our shared commitment to quality, creativity, and craftsmanship.
                         </p>
+
                         <p class="mt-3 text-xl leading-relaxed text-gray-600 dark:text-gray-300 md:mt-8">
-                            In my spare time I like to write, read, create content for pen & paper role playing games, listen to music and dabble in photography. My wife and I also have our own small brand where we make custom leather goods over at Makers South so make sure to check that out!
+                            This site is a reflection of my eclectic pursuits—a space where technology meets art, and where ideas are free to roam. I invite you to explore, connect, and join me on this ever-evolving journey.
                         </p>
 
                     </div>
 
                 </div>
-            </div>
         </section>
 
        @include('layouts.footer')

@@ -88,9 +88,6 @@
                                             before:self-start
                                             before:-translate-x-1/2
                                             before:translate-y-3
-
-
-
                                             ">
                                     <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-neutral-600">
                                         {{ $post->created_at->format('Y-m-d') }}
@@ -108,7 +105,7 @@
                                         }
                                     </style>
 
-                                    <x-markdown :options="['commonmark' => ['enable_strong' => true, 'enable_em' => true]]">
+                                    <x-markdown class="markdown" :options="['commonmark' => ['enable_strong' => true, 'enable_em' => true]]">
                                         {!! $post->content !!}
                                     </x-markdown>
 
