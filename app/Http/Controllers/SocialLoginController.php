@@ -11,10 +11,15 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
 {
-    public function redirect(string $provider)
+    public function redirect(Request $request)
     {
-        return Socialite::driver($provider)->redirect();
+        if ($request->has('intended')) {
+            session()->put('url.intended', $request->get('intended'));
+        }
+
+        return Socialite::driver('github')->redirect();
     }
+
 
     public function callback(string $provider)
     {
