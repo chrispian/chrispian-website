@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SocialLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,11 @@ Route::view('/about', 'about')->name('about');
 Route::get('/feed', function () {
     return redirect()->to('/feed/blog');
 });
+
+
+// Socialite
+Route::get('/auth/{provider}/redirect', [SocialLoginController::class, 'redirect']);
+Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback']);
 
 
 Route::get('/blog', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');;

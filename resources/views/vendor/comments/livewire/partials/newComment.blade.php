@@ -1,3 +1,12 @@
+@if (!auth()->check())
+    <div class="mb-4 text-sm text-gray-600 text-center">
+        Want to comment as yourself?
+        <a href="{{ url('/auth/github/redirect') }}" class="underline hover:text-blue-600">
+            Sign in with GitHub
+        </a>
+    </div>
+@endif
+
 @if($writable && \Illuminate\Support\Facades\Gate::check('createComment', $model))
     <div class="comments-form">
         @if($showAvatars)
