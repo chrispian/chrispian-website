@@ -1,5 +1,5 @@
 @if($writable && \Illuminate\Support\Facades\Gate::check('createComment', $model))
-    <div class="comments-form bg-black/15 rounded-lg p-4 border border-gray-700">
+    <div class="comments-form bg-gray-700/25 rounded-lg p-4 ">
         @if($showAvatars)
             <x-comments::avatar/>
         @endif

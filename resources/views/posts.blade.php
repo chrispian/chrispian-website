@@ -9,38 +9,35 @@
 
     <!-- component -->
 
+
+
     <div class="overflow-x-hidden">
         @include('layouts.nav')
         <!-- Component Start -->
-        <section class="relative flex flex-col justify-center bg-[#1c1d1f] overflow-hidden">
-            <h2 class="ml-6 lg:ml-48 2xl:ml-96 text-4xl text-orange-700">Blog Posts</h2>
-            <div class="w-full max-w-6xl mx-auto px-4 md:px-6 py-12">
 
-                <div class="flex flex-col justify-center divide-y divide-slate-200 [&>*]:py-1">
+        <div class="bg-black/10 mx-8 py-4">
+            <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl lg:max-w-4xl">
+                    <h2 class="text-2xl font-bold tracking-tight text-pretty sm:text-5xl">Articles</h2>
+                    <p class="mt-2 text-lg/8 text-gray-600">I write to think.</p>
 
+                    <div class="space-y-8 lg:mt-2 lg:space-y-8">
+                        @foreach ($posts as $post)
+                            @component('components.blog-post', ['post' => $post]) @endcomponent
+                        @endforeach
 
-                    <div class="w-full max-w-3xl mx-auto">
-
-                        <!-- Vertical Timeline #1 -->
-                        <div class="-my-6">
-
-                            @foreach ($posts as $post)
-                                @component('components.timeline-item', ['post' => $post]) @endcomponent
-                            @endforeach
-
-                            <div class="flex mt-6 justify-end">
-                                {{ $posts->links() }}
-                            </div>
-
-
+                        <div class="flex mt-6 justify-end">
+                            {{ $posts->links() }}
                         </div>
-                        <!-- End: Vertical Timeline #1 -->
+
 
                     </div>
-
                 </div>
             </div>
-        </section>
+        </div>
+
+
+
 
 
         @include('layouts.footer')

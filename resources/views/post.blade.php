@@ -25,106 +25,96 @@
 
 
         <!-- Component Start -->
-        <!-- component -->
+
+        <div class>
+            <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl">
+
+                    <div class="space-y-8 lg:mt-2 lg:space-y-8 w-full">
+
+                        <article class="w-full relative isolate p-6 flex flex-col gap-8 lg:flex-row  bg-black/25 rounded-lg">
+                            <div class="">
+                                <h3 class="text-2xl font-bold text-[#8cfbe6] mb-4" >
+                                    <a href="{{ route('posts.show', ['slug' => $post->slug]) }}">
+                                        {{ $post->title }}
+                                    </a>
+                                </h3>
+
+                                <div class="flex items-center gap-x-4 text-xs">
+                                    <time datetime="2020-03-16" class="text-gray-500">{{ $post->created_at->format('Y-m-d') }}</time>
+                                    <ul class="flex flex-wrap text-xs font-medium -m-1">
+                                        @foreach($post->categories as $category)
+                                            <li class="m-1">
+                                                <span class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out" href="#0">{{ $category->title }}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+
+                                </div>
+                                <div class="group relative m-full">
+                                    <div class="float-right aspect-video sm:aspect-2/1 lg:aspect-square lg:w-64 lg:shrink-0">
+                                        <figure class="h-[200px] overflow-hidden relative size-full rounded-2xl bg-gray-50 object-cover">
+                                            @php
+                                                $media = $post->getFirstMedia('cover_image');
+                                            @endphp
+
+                                            @if ($media)
+                                                <img
+                                                    src="{{ $media->getUrl('thumb') }}"
+                                                    srcset="
+                            {{ $media->getUrl('thumb') }} 300w,
+                            {{ $media->getUrl('medium') }} 540w,
+                            {{ $media->getUrl('large') }} 1024w
+        "
+                                                    sizes="(max-width: 600px) 300px, (max-width: 1024px) 540px, 1024px"
+                                                    alt="{{ $post->title }} cover image"
+                                                    role="img"
+                                                    class="object-cover"
+                                                    width="540"
+                                                    height="300"
+                                                    loading="lazy"
+                                                />
+                                            @endif
+
+
+                                        </figure>
+                                    </div>
+
+                                    <p class="mt-5 text-sm/6 text-gray-600">
+                                        <x-markdown class="markdown" :options="['commonmark' => ['enable_strong' => true, 'enable_em' => true]]">
+                                            {!! $post->content !!}
+                                        </x-markdown>
+
+                                        @if($is_draft)
+                                            <x-draft-disclaimer />
+                                        @endif
+
+
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+
+
+                        <livewire:comments :model="$post"/>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <section class="mb-12 relative flex flex-col justify-center bg-[#1c1d1f] overflow-hidden w-full">
             <div class="w-full lg:w-[80%] 2xl:w-[60%]  mx-auto justify-center">
                 <div class="flex flex-col justify-center divide-y divide-slate-200 [&>*]:py-1">
 
                     <div class="w-full mx-auto">
 
-                        <!-- Vertical Timeline #1 -->
-                        <div class="w-full">
-
-                            <!-- Post {{ $post->id }} -->
-                            <div class="relative px-4 sm:px-4 md:px-6 lg:pl-32 py-6 group">
-                                <!-- Purple label -->
-                                <div class="font-medium text-neutral-500 mb-1 sm:mb-0">
-                                    @foreach($post->categories as $category)
-                                        <span class="text-sm text-gray-600">{{ $category->title }}</span>@if(!$loop->last), @endif
-                                    @endforeach
-
-                                </div>
-                                <!-- Vertical line (::before) ~ Date ~ Title ~ Circle marker (::after) -->
-                                <div class="
-                                            flex
-                                            flex-col
-                                            items-start
-                                            mb-1
-                                            after:absolute
-                                            after:left-2
-                                            after:w-0
-                                            after:h-0
-                                            after:bg-neutral-600
-                                            after:border-0
-                                            sm:after:border-0
-                                            lg:after:border-2
-
-                                            after:box-content
-                                            after:border-neutral-600
-                                            after:rounded-full
-                                            after:-translate-x-1/2
-                                            after:translate-y-1.5
-                                            sm:flex-row
-                                            sm:p-0
-                                            sm:m-0
-                                            sm:before:left-0
-                                            sm:before:ml-[6.5rem]
-                                            sm:after:left-0
-                                            sm:after:ml-[6.5rem]
-                                            md:p2
-                                            md:m-2
-                                            md:after:w-2
-                                            md:after:h-2
-
-                                            group-last:before:hidden
-                                            sm:group-last:before:hidden
-                                            lg:group-last:before:inline-block
-
-                                            before:absolute
-                                            before:left-2
-                                            before:h-full
-                                            before:px-px
-                                            before:bg-neutral-600
-                                            before:self-start
-                                            before:-translate-x-1/2
-                                            before:translate-y-3
-                                            ">
-                                    <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-neutral-600">
-                                        {{ $post->created_at->format('Y-m-d') }}
-                                    </time>
-                                    <div class="text-xl font-bold text-[#8cfbe6]">
-                                        {{ $post->title }}
-                                    </div>
-
-                                </div>
-                                <!-- Content -->
-                                <div class="text-neutral-300 post-body">
-                                    <style>
-                                        p {
-                                            margin-bottom: 1rem;
-                                        }
-                                    </style>
-
-                                    <x-markdown class="markdown" :options="['commonmark' => ['enable_strong' => true, 'enable_em' => true]]">
-                                        {!! $post->content !!}
-                                    </x-markdown>
 
 
-
-
-                                    @if($is_draft)
-                                        <x-draft-disclaimer />
-                                    @endif
-
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                        <!-- End: Vertical Timeline #1 -->
-
-                        <livewire:comments :model="$post"/>
 
                     </div>
 

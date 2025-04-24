@@ -58,6 +58,11 @@
                                 @component('components.timeline-item', ['post' => $post]) @endcomponent
                             @endforeach
 
+{{--                            <div class="flex mt-6 justify-end">--}}
+{{--                                {{ $posts->links() }}--}}
+{{--                            </div>--}}
+
+
 
                         </div>
                         <!-- End: Vertical Timeline #1 -->
