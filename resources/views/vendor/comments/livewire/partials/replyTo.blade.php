@@ -1,12 +1,13 @@
 @if($writable)
     <div
-        class="comments-form comments-reply"
+        class="comments-form comments-reply p-2 rounded-md border border-gray-700/70"
         wire:key="{{ $comment->nestedComments->last()?->id ?? 0 }}"
     >
         @if($showAvatar)
             <x-comments::avatar/>
         @endif
         <form class="comments-form-inner" wire:submit.prevent="reply">
+
             <div
                 x-data="{ isExpanded: false }"
                 x-init="$watch('isExpanded', (isExpanded) => {
@@ -22,6 +23,14 @@
                     placeholder="{{ __('comments::comments.write_reply') }}"
                 >
                 <div x-show="isExpanded">
+                    @if (!auth()->check())
+                        <div class="mb-4 text-sm text-gray-400 text-center">
+                            Want to comment as yourself?
+                            <a href="{{ url('/auth/github/redirect') }}" class="underline hover:text-pink-400 text-pink-600">
+                                Sign in with GitHub
+                            </a>
+                        </div>
+                    @endif
                     <div>
                         <x-dynamic-component
                             :component="\Spatie\LivewireComments\Support\Config::editor()"

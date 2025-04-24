@@ -4,16 +4,15 @@
     use Illuminate\Support\Facades\Gate;
 @endphp
 
-<section class="comments {{ $newestFirst ? 'comments-newest-first' : '' }}">
+
+<section class="rounded-md p-4 mt-[60px] bg-black/25 comments {{ $newestFirst ? 'comments-newest-first' : '' }}">
     <header class="comments-header">
-        @if($writable && $showNotificationOptions && Auth::check())
+    @if($writable && $showNotificationOptions && Auth::check())
             <div x-data="{ subscriptionsOpen: false}" class="comments-subscription">
                 <button @click.prevent="subscriptionsOpen = true" class="comments-subscription-trigger">
                     {{ NotificationSubscriptionType::from($selectedNotificationSubscriptionType)->longDescription() }}
                 </button>
                 <x-comments::modal
-                    bottom
-                    compact
                     x-show="subscriptionsOpen"
                     @click.outside="subscriptionsOpen = false"
                 >

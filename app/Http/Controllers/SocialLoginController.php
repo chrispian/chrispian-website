@@ -7,18 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Contracts\Provider;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
 {
-    public function redirect(Request $request)
+    public function redirect($provider)
     {
-        if ($request->has('intended')) {
-            session()->put('url.intended', $request->get('intended'));
-        }
-
-        return Socialite::driver('github')->redirect();
+        session()->put('url.intended', url()->previous());
+        return Socialite::driver($provider)->redirect();
     }
+
+
+
 
 
     public function callback(string $provider)

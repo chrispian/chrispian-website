@@ -73,8 +73,8 @@
     --comments-color-text-dimmed: rgb(164, 164, 164);
     --comments-color-text-inverse: white;
 
-    --comments-color-accent: rgba(67, 56, 202);
-    --comments-color-accent-hover: rgba(67, 56, 202, 0.75);
+    --comments-color-accent: rgb(172, 0, 179);
+    --comments-color-accent-hover: rgb(230, 64, 237);
 
     --comments-color-danger: rgb(225, 29, 72);
     --comments-color-danger-hover: rgb(225, 29, 72, 0.75);
@@ -98,7 +98,7 @@ nav span {
 }
 
 .comments .editor-toolbar {
-    display: none;
+
 }
 
 

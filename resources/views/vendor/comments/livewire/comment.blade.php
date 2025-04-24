@@ -34,7 +34,7 @@
 
 <div
     id="comment-{{ $comment->id }}"
-    class="comments-group {{ $showAvatar ? 'comments-group-with-avatars' : '' }}"
+    class="comments-group-alt m-4 mb-8 {{ $showAvatar ? 'comments-group-with-avatars' : '' }}"
     x-data="{ confirmDelete: false, urlCopied: false }"
     x-effect="
         if (urlCopied) {
@@ -43,12 +43,12 @@
         }
     "
 >
-    <div class="comments-comment">
+    <div class="comments-comment bg-black/15 rounded-lg p-4 border border-gray-700">
         @if($showAvatar)
             <img src="{{ $avatarUrl }}" alt="{{ $comment->commentator ? $comment->commentator->name : $guestName }}" class="comments-avatar" />
         @endif
         <div class="comments-comment-inner">
-            <div class="comments-comment-header">
+            <div class="comments-comment-header !text-yellow-600    ">
                 {{-- Check if the commentator is logged in --}}
                 @if($url = $comment->commentatorProperties()?->url)
                     <a href="{{ $url }}">

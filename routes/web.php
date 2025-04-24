@@ -28,11 +28,11 @@ Route::get('/feed', function () {
 
 
 // Socialite
-//Route::get('/auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])
-//    ->name('auth.redirect');
-//
-//Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback'])
-//    ->name('auth.callback');
+Route::get('/auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])
+    ->name('auth.redirect');
+
+Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback'])
+    ->name('auth.callback');
 
 
 
